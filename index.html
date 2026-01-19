@@ -1,86 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
+<html lang="">
+  <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-
-
-    <script>
-
-        const getLocation = () => {
-            return new Promise((resolve, reject) => {
-                if (!navigator.geolocation) {
-                    reject('Геолокация не поддерживается');
-                    return;
-                }
-
-                navigator.geolocation.getCurrentPosition(
-                    (pos) => resolve(pos.coords),
-                    (err) => {
-                        const messages = {
-                            1: 'Разрешение отклонено',
-                            2: 'Ошибка позиционирования',
-                            3: 'Таймаут'
-                        };
-                        reject(messages[err.code] || err.message);
-                    },
-                    {
-                        enableHighAccuracy: true,
-                        timeout: 15000,
-                        maximumAge: 30000
-                    }
-                );
-            });
-        };
-
-        const reverseGeocode = async (lat, lon) => {
-            const res = await fetch(
-                `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
-            );
-            const data = await res.json();
-            return data.display_name; // "Москва, Россия"
-        };
-
-
-        // Использование
-        getLocation()
-            .then(({ latitude, longitude, accuracy }) => {
-
-                reverseGeocode(latitude, longitude).then((result) => console.log(result));
-
-                console.log(`Позиция: ${latitude}, ${longitude}`);
-            })
-            .catch(console.error);
-
-        // https://api.openweathermap.org/data/2.5/weather?lat=53.8738688&lon=30.2874624&appid=3369439c18076b7ac05a27cb9bc788ce&units=metric&lang=ru
-                
-            // API возвращает следующие стандартные значения в поле weather.main:
-
-            //     Clear — ясное небо
-
-            //     Clouds — облачно (любая облачность)
-
-            //     Rain — дождь (от слабого до сильного)
-
-            //     Drizzle — морось
-
-            //     Snow — снег
-
-            //     Thunderstorm — гроза
-
-            //     Atmosphere — атмосферные явления (туман, дымка, пыль и т.д.)
-
-        // https://api.unsplash.com/search/photos?query=city+mogilev&per_page=1&client_id=449eLSBLSB5kmRvJtsQkKvz_kG3QFmPaGJp2CLv9XY8
-
-
-    
-    </script>
-
-</body>
-
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
