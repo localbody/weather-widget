@@ -25,7 +25,10 @@ onMounted(async () => {
     position.value = coordinates
 
     if (coordinates) {
-      weather.value = getWeather(coordinates.latitude, coordinates.longitude)
+      weather.value = await getWeather(
+        coordinates.latitude,
+        coordinates.longitude
+      )
       city.value = await getCity(coordinates.latitude, coordinates.longitude)
     }
 
