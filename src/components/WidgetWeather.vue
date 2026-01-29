@@ -25,7 +25,7 @@ const props = defineProps({
 const getCardGradient = () => {
   const prefix = 'card__top--'
   let value = 'cold'
-  const temperature = props.temperature
+  const temperature = props.weather.temperature
   if (temperature > -10 && temperature <= 10) {
     value = 'cool'
   } else if (temperature > 10 && temperature <= 20) {

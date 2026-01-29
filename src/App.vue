@@ -25,15 +25,9 @@ onMounted(async () => {
     position.value = coordinates
 
     if (coordinates) {
-      weather.value = await getWeather(
-        coordinates.latitude,
-        coordinates.longitude
-      )
-
-      // console.log(weather.value)
+      weather.value = getWeather(coordinates.latitude, coordinates.longitude)
+      city.value = await getCity(coordinates.latitude, coordinates.longitude)
     }
-
-    city.value = await getCity(coordinates.latitude, coordinates.longitude)
 
     if (city.value) {
       imageSrc.value = await getCityImage(city.value)
